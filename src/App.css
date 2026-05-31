@@ -264,13 +264,6 @@
   gap: 0.2rem;
 }
 
-.product-price::after {
-  content: '€';
-  font-size: 1rem;
-  font-weight: 600;
-  color: var(--accent-cyan);
-}
-
 /* Custom Overlay Elements */
 .modal-overlay {
   position: fixed;
@@ -890,4 +883,25 @@ input:checked + .slider:before {
     flex-direction: column;
     align-items: flex-start;
   }
+}
+
+/* Image Upload Dotted Zone */
+.image-upload-zone {
+  border: 2px dashed var(--glass-border) !important;
+  transition: var(--transition-snappy);
+}
+
+.image-upload-zone:hover, 
+.image-upload-zone.dragover {
+  border-color: var(--accent-cyan) !important;
+  background: rgba(0, 242, 254, 0.05) !important;
+  box-shadow: 0 0 15px rgba(0, 242, 254, 0.15) !important;
+}
+
+.image-upload-zone p {
+  transition: var(--transition-snappy);
+}
+
+.image-upload-zone:hover p {
+  color: #fff !important;
 }

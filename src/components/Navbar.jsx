@@ -1,16 +1,15 @@
 import React, { useState } from 'react';
-import { Cpu, ShieldCheck, UserCheck, Menu, X, LogOut, LayoutDashboard } from 'lucide-react';
+import { Car, ShieldCheck, UserCheck, Menu, X, LogOut, LayoutDashboard } from 'lucide-react';
 
 export default function Navbar({ activeCategory, setActiveCategory, onAdminClick, isAdmin, onLogout }) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   const categories = [
     { id: 'all', label: 'Tous' },
-    { id: 'machine', label: 'Machines' },
-    { id: 'watch', label: 'Montres' },
-    { id: 'tablet', label: 'Tablettes' },
-    { id: 'tv', label: 'Télévisions' },
-    { id: 'book', label: 'Livres' }
+    { id: 'car', label: 'Voitures' },
+    { id: 'motorcycle', label: 'Motos' },
+    { id: 'rental', label: 'Locations' },
+    { id: 'promo', label: 'Promotions' }
   ];
 
   return (
@@ -24,9 +23,11 @@ export default function Navbar({ activeCategory, setActiveCategory, onAdminClick
       justifyContent: 'space-between',
       borderBottom: '1px solid var(--glass-border)'
     }}>
-      {/* Brand Logo */}
+      {/* Brand Logo - Secret double click trigger for Admin */}
       <div 
         onClick={() => setActiveCategory('all')} 
+        onDoubleClick={onAdminClick}
+        title="PASSION STORE"
         style={{
           display: 'flex',
           alignItems: 'center',
@@ -43,7 +44,7 @@ export default function Navbar({ activeCategory, setActiveCategory, onAdminClick
           justifyContent: 'center',
           boxShadow: 'var(--glow-cyan)'
         }}>
-          <Cpu size={24} color="#040814" />
+          <Car size={24} color="#040814" />
         </div>
         <span style={{
           fontFamily: 'var(--font-title)',
@@ -93,20 +94,25 @@ export default function Navbar({ activeCategory, setActiveCategory, onAdminClick
         alignItems: 'center',
         gap: '1.25rem'
       }}>
-        {/* Security Badge */}
-        <div style={{
-          display: 'flex',
-          alignItems: 'center',
-          gap: '0.5rem',
-          background: 'rgba(16, 185, 129, 0.08)',
-          border: '1px solid rgba(16, 185, 129, 0.2)',
-          color: '#34d399',
-          padding: '0.4rem 0.8rem',
-          borderRadius: '50px',
-          fontSize: '0.75rem',
-          fontWeight: 600,
-          letterSpacing: '0.05em'
-        }}>
+        {/* Security Badge - Secret double click trigger for Admin */}
+        <div 
+          onDoubleClick={onAdminClick}
+          title="SÉCURITÉ ACTIVE"
+          style={{
+            display: 'flex',
+            alignItems: 'center',
+            gap: '0.5rem',
+            background: 'rgba(16, 185, 129, 0.08)',
+            border: '1px solid rgba(16, 185, 129, 0.2)',
+            color: '#34d399',
+            padding: '0.4rem 0.8rem',
+            borderRadius: '50px',
+            fontSize: '0.75rem',
+            fontWeight: 600,
+            letterSpacing: '0.05em',
+            cursor: 'pointer'
+          }}
+        >
           <ShieldCheck size={14} />
           <span>SÉCURITÉ ACTIVE</span>
           <span style={{
@@ -119,8 +125,8 @@ export default function Navbar({ activeCategory, setActiveCategory, onAdminClick
           }}></span>
         </div>
 
-        {/* Admin Buttons */}
-        {isAdmin ? (
+        {/* Admin Buttons - Only visible when Admin is logged in */}
+        {isAdmin && (
           <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
             <button 
               onClick={onAdminClick}
@@ -144,18 +150,6 @@ export default function Navbar({ activeCategory, setActiveCategory, onAdminClick
               <LogOut size={14} />
             </button>
           </div>
-        ) : (
-          <button 
-            onClick={onAdminClick}
-            className="btn-secondary"
-            style={{
-              padding: '0.5rem 1rem',
-              fontSize: '0.85rem'
-            }}
-          >
-            <UserCheck size={14} />
-            <span>Admin</span>
-          </button>
         )}
       </div>
 
@@ -215,21 +209,23 @@ export default function Navbar({ activeCategory, setActiveCategory, onAdminClick
             <span style={{ fontSize: '0.8rem', color: '#34d399', display: 'flex', alignItems: 'center', gap: '0.25rem' }}>
               <ShieldCheck size={14} /> SÉCURITÉ ACTIVE
             </span>
-            <button 
-              onClick={() => {
-                onAdminClick();
-                setMobileMenuOpen(false);
-              }}
-              className="btn-secondary"
-              style={{ padding: '0.4rem 0.8rem', fontSize: '0.8rem' }}
-            >
-              {isAdmin ? 'Console Admin' : 'Admin'}
-            </button>
+            {isAdmin && (
+              <button 
+                onClick={() => {
+                  onAdminClick();
+                  setMobileMenuOpen(false);
+                }}
+                className="btn-secondary"
+                style={{ padding: '0.4rem 0.8rem', fontSize: '0.8rem' }}
+              >
+                Console Admin
+              </button>
+            )}
           </div>
         </div>
       )}
 
-      {/* Style Overrides for Responsive Behavior inline (since we are not using media queries in custom JS, we can inject a style block) */}
+      {/* Style Overrides for Responsive Behavior inline */}
       <style>{`
         @media (max-width: 900px) {
           .desktop-nav, .desktop-actions {
