@@ -235,6 +235,11 @@ export default function Navbar({ activeCategory, setActiveCategory, onAdminClick
             display: block !important;
           }
         }
+        @media (max-width: 480px) {
+          nav.glass {
+            padding: 1rem !important;
+          }
+        }
       `}</style>
     </nav>
   );

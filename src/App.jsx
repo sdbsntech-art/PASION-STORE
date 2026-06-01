@@ -877,7 +877,7 @@ export default function App() {
                 {checkoutErrors.phone && <span className="error-text">{checkoutErrors.phone}</span>}
               </div>
 
-              <div className="form-group" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem' }}>
+              <div className="form-group form-grid-2col">
                 <div>
                   <label className="form-label">Ville / Région *</label>
                   <input
@@ -928,7 +928,7 @@ export default function App() {
                 ></textarea>
               </div>
 
-              <div style={{ display: 'flex', gap: '1rem', marginTop: '2rem' }}>
+              <div className="modal-buttons-container">
                 <button
                   type="button"
                   onClick={() => setIsCheckoutOpen(false)}
